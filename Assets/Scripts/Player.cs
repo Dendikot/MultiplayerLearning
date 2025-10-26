@@ -1,0 +1,26 @@
+using UnityEngine;
+
+public class Player : MonoBehaviour
+{
+    [SerializeField]
+    private float _speed = 2f;
+    private float _inputH;
+    private float _inputV;
+
+    public void SetInput(float h, float v)
+    {
+        _inputV = v;
+        _inputH = h;
+    }
+
+    void Update()
+    {
+        Move();
+    }
+
+    private void Move()
+    {
+        Vector3 direction = new Vector3(_inputH, 0, _inputV).normalized;
+        transform.position += direction * Time.deltaTime * _speed;
+    }
+}
