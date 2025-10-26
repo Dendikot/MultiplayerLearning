@@ -2,10 +2,23 @@ using Colyseus;
 
 public class MultiplayerManager : ColyseusManager<MultiplayerManager>
 {
-    void Start()
+    private ColyseusRoom<State> _room;
+    protected override void Awake()
     {
+        base.Awake();
+
         Instance.InitializeClient();
-        Instance.client.JoinOrCreate<State>("state_handler");
+        Connect();
     }
 
+    private async void Connect()
+    {
+       _room = await Instance.client.JoinOrCreate<State>("state_handler");
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        _room.Leave();
+    }
 }
