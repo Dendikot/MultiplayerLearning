@@ -4,7 +4,7 @@ using Input = UnityEngine.Input;
 public class Controller : MonoBehaviour
 {
     [SerializeField]
-    public Player Player;
+    public PlayerCharacter Player;
 
     // Update is called once per frame
     void Update()
