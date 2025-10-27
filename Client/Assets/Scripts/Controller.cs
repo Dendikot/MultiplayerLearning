@@ -1,10 +1,12 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Input = UnityEngine.Input;
 
 public class Controller : MonoBehaviour
 {
     [SerializeField]
-    public PlayerCharacter Player;
+    private PlayerCharacter _player;
 
     // Update is called once per frame
     void Update()
@@ -12,6 +14,18 @@ public class Controller : MonoBehaviour
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
-        Player.SetInput(h, v);
+        _player.SetInput(h, v);
+
+        SendMove();
+    }
+
+    private void SendMove()
+    {
+        _player.GetMoveInfo(out Vector3 position);
+        Dictionary<string, object> data = new Dictionary<string, object>()
+        {
+            {"x", position.x }, {"y", position.z}
+        };
+        MultiplayerManager.Instance.SendMessage("move", data);
     }
 }

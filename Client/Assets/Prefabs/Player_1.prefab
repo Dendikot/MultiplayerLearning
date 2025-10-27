@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 6220208048244661242}
   - component: {fileID: 736877011422316732}
   - component: {fileID: 2204712019835814916}
-  - component: {fileID: 7163095582043514563}
-  - component: {fileID: 3473130575414711037}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -115,32 +113,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7163095582043514563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3282354551793128918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a22ff03a3e6c0984f86d60c9c2a122ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Player
-  _speed: 2
---- !u!114 &3473130575414711037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3282354551793128918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a34c8708d292244b8253b275a434297, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Controller
-  Player: {fileID: 7163095582043514563}
 --- !u!1 &6084955828260521579
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,6 +122,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3311887674278893699}
+  - component: {fileID: 2005817213675592019}
+  - component: {fileID: 9072950241749834058}
   m_Layer: 0
   m_Name: Player_1
   m_TagString: Untagged
@@ -173,3 +147,29 @@ Transform:
   - {fileID: 7092076689965512098}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2005817213675592019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6084955828260521579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a22ff03a3e6c0984f86d60c9c2a122ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
+  _speed: 2
+--- !u!114 &9072950241749834058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6084955828260521579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a34c8708d292244b8253b275a434297, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Controller
+  _player: {fileID: 2005817213675592019}
