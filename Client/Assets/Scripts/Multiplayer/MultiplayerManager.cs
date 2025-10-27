@@ -25,25 +25,34 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager>
 
     private void OnChange(State state, bool isFirstState)
     {
-        state.players.ForEach(ForEachEnemy);
         if (isFirstState == false) return;
 
+        state.players.ForEach((string key, Player player) => {
+            if (key == _room.SessionId) CreatePlayer(player);
+            else CreateEnemy(key, player);
+        });
 
-        var player = state.players[_room.SessionId];
-        var position = new Vector3(player.x - 200, 0, player.y - 200) / 8;
-
-        Instantiate(_player, position, Quaternion.identity);
-
-        state.players.ForEach(ForEachEnemy);
+        _room.State.players.OnAdd += CreateEnemy;
+        _room.State.players.OnRemove += RemoveEnemy;
     }
 
-    private void ForEachEnemy(string key, Player player)
+    private void CreatePlayer(Player player)
     {
-        if (key == _room.SessionId) return;
+        var position = new Vector3(player.x, 0, player.y);
 
-        var position = new Vector3(player.x - 200, 0, player.y - 200) / 8;
+        Instantiate(_player, position, Quaternion.identity);
+    }
+
+    private void CreateEnemy(String key, Player player)
+    {
+        var position = new Vector3(player.x , 0, player.y);
 
         Instantiate(_enemy, position, Quaternion.identity);
+    }
+
+    private void RemoveEnemy(String key, Player player)
+    {
+
     }
 
     protected override void OnDestroy()
