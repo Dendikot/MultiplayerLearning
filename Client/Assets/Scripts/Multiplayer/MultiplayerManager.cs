@@ -27,8 +27,8 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager>
     private void OnChange(State state, bool isFirstState)
     {
         if (isFirstState == false) return;
-
-        state.players.ForEach((string key, Player player) => {
+        
+        state.players.ForEach((key, player) => {
             if (key == _room.SessionId) CreatePlayer(player);
             else CreateEnemy(key, player);
         });
@@ -54,7 +54,7 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager>
 
     private void RemoveEnemy(String key, Player player)
     {
-
+        
     }
 
     protected override void OnDestroy()
@@ -63,7 +63,7 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager>
         _room.Leave();
     }
 
-    public void SendMessageToServer(string key, Dictionary<string, object> data)
+    public void Send(string key, Dictionary<string, object> data)
     {
         _room.Send(key, data);
     }

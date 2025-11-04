@@ -27,6 +27,6 @@ public class Controller : MonoBehaviour
             {"pX", position.x }, {"pY", position.y}, {"pZ", position.z},
             {"vX", velocity.x }, {"vY", velocity.y}, {"vZ", velocity.z}
         };
-        MultiplayerManager.Instance.SendMessageToServer("move", data);
+        MultiplayerManager.Instance.Send("move", data);
     }
 }
