@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   _rigidbody: {fileID: 8240029164552212948}
-  _speed: 2
+  _speed: 25
 --- !u!114 &9072950241749834058
 MonoBehaviour:
   m_ObjectHideFlags: 0

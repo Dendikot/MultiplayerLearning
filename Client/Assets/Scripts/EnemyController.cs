@@ -74,7 +74,8 @@ public class EnemyController : MonoBehaviour
         //    }
         //}
 
-        Debug.LogError($"<color=red>Работает</color> {position}");
+        //Debug.LogError($"<color=red>Работает</color> {position}");
+        
         _character.SetMovement(position, velocity, AverageInterval);
     }
 }
