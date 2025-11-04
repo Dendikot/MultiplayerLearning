@@ -1,4 +1,4 @@
-using Colyseus.Schema;
+﻿using Colyseus.Schema;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Data;
@@ -6,8 +6,9 @@ using System.Data;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private EnemyCharacter _character;
+    private Player _player;
     private List<float> _receiveTimeInterval = new List<float>() { 0, 0, 0, 0, 0 };
-    
+
     private float AverageInterval
     {
         get
@@ -18,11 +19,16 @@ public class EnemyController : MonoBehaviour
             {
                 sum += _receiveTimeInterval[i];
             }
-            return sum/receiveTimeIntervalCount;
+            return sum / receiveTimeIntervalCount;
         }
     }
-    
+
     private float _lastReceiveTime = 0f;
+
+    public void Init(Player player)
+    {
+        _player = player;
+    }
 
     private void SaveReceiveTime()
     {
@@ -37,37 +43,38 @@ public class EnemyController : MonoBehaviour
     {
         SaveReceiveTime();
 
-        Vector3 position = transform.position;
-        Vector3 velocity = Vector3.zero;
+        Vector3 position = new Vector3(_player.pX, _player.pY, _player.pZ);
+        Vector3 velocity = new Vector3(_player.vX, _player.vY, _player.vZ);
 
-        foreach (DataChange dataChange in changes)
-        {
-            switch (dataChange.Field)
-            {
-                case "pX":
-                    position.x = (float)dataChange.Value;
-                    break;
-                case "pY":
-                    position.y = (float)dataChange.Value;
-                    break;
-                case "pZ":
-                    position.z = (float)dataChange.Value;
-                    break;
-                case "vX":
-                    velocity.x = (float)dataChange.Value;
-                    break;
-                case "vY":
-                    velocity.y = (float)dataChange.Value;
-                    break;
-                case "vZ":
-                    velocity.z = (float)dataChange.Value;
-                    break;
-                default:
-                    Debug.LogWarning("Field change is not tracked " + dataChange.Field);
-                    break;
-            }
-        }
+        //foreach (DataChange dataChange in changes)
+        //{
+        //    switch (dataChange.Field)
+        //    {
+        //        case "pX":
+        //            position.x = (float)dataChange.Value;
+        //            break;
+        //        case "pY":
+        //            position.y = (float)dataChange.Value;
+        //            break;
+        //        case "pZ":
+        //            position.z = (float)dataChange.Value;
+        //            break;
+        //        case "vX":
+        //            velocity.x = (float)dataChange.Value;
+        //            break;
+        //        case "vY":
+        //            velocity.y = (float)dataChange.Value;
+        //            break;
+        //        case "vZ":
+        //            velocity.z = (float)dataChange.Value;
+        //            break;
+        //        default:
+        //            Debug.LogWarning("Field change is not tracked " + dataChange.Field);
+        //            break;
+        //    }
+        //}
 
+        Debug.LogError($"<color=red>Работает</color> {position}");
         _character.SetMovement(position, velocity, AverageInterval);
     }
 }

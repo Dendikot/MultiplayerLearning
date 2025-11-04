@@ -5,7 +5,7 @@ public class EnemyCharacter : MonoBehaviour
     private Vector3 _targetPosition = Vector3.zero;
     private float _velocityMagnitude = 0;
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (_velocityMagnitude > .1f)
         {
