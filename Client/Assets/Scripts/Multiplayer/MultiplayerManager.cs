@@ -63,7 +63,7 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager>
         _room.Leave();
     }
 
-    public void SendMessage(string key, Dictionary<string, object> data)
+    public void SendMessageToServer(string key, Dictionary<string, object> data)
     {
         _room.Send(key, data);
     }
