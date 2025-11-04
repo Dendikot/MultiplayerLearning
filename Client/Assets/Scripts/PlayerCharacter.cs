@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PlayerCharacter : MonoBehaviour
 {
-    [SerializeField]
-    private float _speed = 2f;
+    [SerializeField] private Rigidbody _rigidbody;
+    [SerializeField] private float _speed = 2f;
     private float _inputH;
     private float _inputV;
 
@@ -13,7 +13,7 @@ public class PlayerCharacter : MonoBehaviour
         _inputH = h;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Move();
     }
@@ -24,8 +24,9 @@ public class PlayerCharacter : MonoBehaviour
         transform.position += direction * Time.deltaTime * _speed;
     }
 
-    public void GetMoveInfo(out Vector3 position)
+    public void GetMoveInfo(out Vector3 position, out Vector3 velocity)
     {
         position = transform.position;
+        velocity = _rigidbody.linearVelocity;
     }
 }
