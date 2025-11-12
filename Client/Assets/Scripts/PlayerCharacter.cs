@@ -8,6 +8,7 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private Transform _cameraPoint;
     [SerializeField] private float _minHeadAngle = -90f;
     [SerializeField] private float _maxHeadAngle = 90f;
+    [SerializeField] private float _jumpForce = 50;
     private float _inputH;
     private float _inputV;
     private float _rotateY;
@@ -37,8 +38,12 @@ public class PlayerCharacter : MonoBehaviour
 
     private void Move()
     {
-        Vector3 direction = new Vector3(_inputH, 0, _inputV).normalized;
-        transform.position += direction * Time.deltaTime * _speed;
+        //Vector3 direction = new Vector3(_inputH, 0, _inputV).normalized;
+        //transform.position += direction * Time.deltaTime * _speed;
+
+        Vector3 velocity = (transform.forward * _inputV + transform.right * _inputH).normalized * _speed;
+        velocity.y = _rigidbody.linearVelocity.y;
+        _rigidbody.linearVelocity = velocity;
     }
 
     private void RotateY()
@@ -57,5 +62,25 @@ public class PlayerCharacter : MonoBehaviour
     {
         position = transform.position;
         velocity = _rigidbody.linearVelocity;
+    }
+
+    private bool _isFly = true;
+    private void OnCollisionStay(Collision collision)
+    {
+        var contactPoints = collision.contacts;
+        for (int i = 0; i < contactPoints.Length; i++)
+        {
+            if (contactPoints[i].normal.y > .45f) _isFly = false;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        _isFly = true;
+    }
+
+    public void Jump() {
+        if (_isFly) return;
+        _rigidbody.AddForce(0,_jumpForce,0, ForceMode.VelocityChange);
     }
 }

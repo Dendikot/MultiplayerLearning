@@ -52,6 +52,9 @@ MonoBehaviour:
   _speed: 25
   _head: {fileID: 2536951663533444778}
   _cameraPoint: {fileID: 8497419796244875910}
+  _minHeadAngle: -90
+  _maxHeadAngle: 90
+  _jumpForce: 5
 --- !u!114 &9072950241749834058
 MonoBehaviour:
   m_ObjectHideFlags: 0

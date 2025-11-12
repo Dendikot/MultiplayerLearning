@@ -20,8 +20,11 @@ public class Controller : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 
+        bool space = Input.GetKeyDown(KeyCode.Space);
+
         _player.SetInput(h, v, mouseX * _mouseSensitivity);
         _player.RotateX(-mouseY * _mouseSensitivity);
+        if (space) _player.Jump();
 
         SendMove();
     }
@@ -36,4 +39,6 @@ public class Controller : MonoBehaviour
         };
         MultiplayerManager.Instance.Send("move", data);
     }
+
+
 }
