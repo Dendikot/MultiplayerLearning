@@ -56,6 +56,10 @@ export class State extends Schema {
         player.rX = data.rX;
         player.rY = data.rY;
     }
+
+    shoot() {
+
+    }
 }
 
 export class StateHandlerRoom extends Room<State> {
@@ -69,6 +73,10 @@ export class StateHandlerRoom extends Room<State> {
         this.onMessage("move", (client, data) => {
             //console.log("StateHandlerRoom received message from", client.sessionId, ":", data);
             this.state.movePlayer(client.sessionId, data);
+        });
+
+        this.onMessage("shoot", (client, data) => {
+            this.broadcast("Shoot", data, {except: client});
         });
     }
 

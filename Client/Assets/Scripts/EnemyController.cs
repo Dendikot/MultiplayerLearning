@@ -6,8 +6,11 @@ using System.Data;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private EnemyCharacter _character;
+    [SerializeField] private EnemyGun _gun;
     private Player _player;
     private List<float> _receiveTimeInterval = new List<float>() { 0, 0, 0, 0, 0 };
+    private float _lastReceiveTime = 0f;
+
 
     private float AverageInterval
     {
@@ -23,13 +26,21 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private float _lastReceiveTime = 0f;
+
 
     public void Init(Player player)
     {
         _player = player;
         _character.SetSpeed(player.speed);
         player.OnChange += OnChange;
+    }
+
+    public void Shoot(in ShootInfo info)
+    {
+        Vector3 position = new Vector3(info.pX, info.pY, info.pZ);
+        Vector3 velocity = new Vector3(info.dX, info.dY, info.dZ);
+
+        _gun.Shoot(position, velocity);
     }
 
     public void Destroy()
