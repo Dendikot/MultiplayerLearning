@@ -34,7 +34,7 @@ public class EnemyCharacter : Character
 
     public void SetRotateXY(float x, float y)
     {
-        _head.localEulerAngles = new Vector3(x, y, 0);
+        _head.localEulerAngles = new Vector3(x, 0, y);
     }
 
     public void SetRotateX(float x)
@@ -45,7 +45,7 @@ public class EnemyCharacter : Character
 
     public void SetRotateY(float y)
     {
-        _head.localEulerAngles = new Vector3(0, y, 0);
+        _head.localEulerAngles = new Vector3(0, 0, y);
     }
 
     public void SetSpeed(float value) => speed = value;
