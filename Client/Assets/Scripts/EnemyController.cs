@@ -28,6 +28,14 @@ public class EnemyController : MonoBehaviour
     public void Init(Player player)
     {
         _player = player;
+        _character.SetSpeed(player.speed);
+        player.OnChange += OnChange;
+    }
+
+    public void Destroy()
+    {
+        _player.OnChange -= OnChange; 
+        Destroy(gameObject);
     }
 
     private void SaveReceiveTime()
@@ -77,5 +85,22 @@ public class EnemyController : MonoBehaviour
         //Debug.LogError($"<color=red>Работает</color> {position}");
         
         _character.SetMovement(position, velocity, AverageInterval);
+        
+        foreach (DataChange dataChange in changes)
+        {
+            switch (dataChange.Field)
+            {
+                case "rX":
+                    _character.SetRotateX((float)dataChange.Value);
+                    break;
+                case "rY":
+                    //_character.SetRotateY((float)dataChange.Value);
+                    break;
+                default:
+                    Debug.LogWarning("Field change is not tracked " + dataChange.Field);
+                    break;
+            }
+        }
+        //_character.SetRotateXY(_player.rX, _player.rY);
     }
 }

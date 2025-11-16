@@ -574,7 +574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MultiplayerManager
   _colyseusSettings: {fileID: 11400000, guid: 3add58d7d71761648bcf53747d264d47, type: 2}
-  _player: {fileID: 6084955828260521579, guid: 5e89a9e150dd95e4a85a36fa7052ca2c, type: 3}
+  _player: {fileID: 2005817213675592019, guid: 5e89a9e150dd95e4a85a36fa7052ca2c, type: 3}
   _enemy: {fileID: 5666259037876392767, guid: ed4268d349f639744aaf5b90cfe6073e, type: 3}
 --- !u!4 &944191867
 Transform:
